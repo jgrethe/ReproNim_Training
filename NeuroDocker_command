@@ -5,3 +5,10 @@ docker run --rm kaczmarj/neurodocker:master generate -b neurodebian:stretch-non-
 
 
 docker build -t myfsl -f Dockerfile .
+
+docker run -it --rm myfsl
+
+In Container:
+apt-get update
+apt-get install r-base
+apt-get install git emacs
