@@ -67,3 +67,14 @@ RUN echo '{ \
     \n  "generation_timestamp": "2017-11-11 16:05:42", \
     \n  "neurodocker_version": "0.3.1-21-ged92d36" \
     \n}' > /neurodocker/neurodocker_specs.json
+
+RUN apt-get -y update
+RUN apt-get -y install r-base
+RUN apt-get -y install git emacs
+RUN git clone https://github.com/jgrethe/ReproNim_Training.git
+
+# Add command(s) to entrypoint
+RUN sed -i '$i/ReproNim_Training/analyze' $ND_ENTRYPOINT
+
+WORKDIR "ReproNim_Training"
+
