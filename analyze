@@ -1,0 +1,11 @@
+#!/bin/sh -ev
+
+if [ ! -d data ] ; then mkdir data ; fi
+
+./calculate_volumes FemaleSubjects.csv data > female.csv
+./calculate_volumes MaleSubjects.csv data > male.csv
+Rscript repronim_challenge.R
+
+exit 0
+
+# eof
