@@ -1,4 +1,4 @@
-#!/bin/sh -v
+#!/bin/sh -e
 
 if [ ! -d data ] ; then mkdir data ; fi
 
