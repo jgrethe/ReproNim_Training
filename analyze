@@ -2,9 +2,17 @@
 
 if [ ! -d data ] ; then mkdir data ; fi
 
+echo "Calculating female subjects.../n"
 ./calculate_volumes FemaleSubjects.csv data > female.csv
+
+echo "Calculating male subjects.../n"
 ./calculate_volumes MaleSubjects.csv data > male.csv
+
+echo "Running analysis.../n"
 Rscript repronim_challenge.R
+
+echo "/n"
+cat results.txt
 
 exit 0
 
