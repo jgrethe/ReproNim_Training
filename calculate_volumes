@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+progname=`basename $0`
+
+calc_vol()
+{
+
+    fname="$1"
+    std_fname=`echo "$fname" | sed 's/.nii$/_std.nii/'`
+    brain_fname=`echo "$fname" | sed 's/.nii$/_std_brain.nii/'`
+
+    fslreorient2std "$1" "$std_fname"
+    bet "$std_fname" "$brain_fname"
+    fslstats "$brain_fname" -V | awk '{print $2}'
+
+    return 0
+
+} # end calc_vol()
+
+if [ $# -ne 2 ]
+then
+    echo "usage: $progname <subjects CSV> <data directory>"
+    echo "calculates the brain volumes for a set of subjects"
+    exit 1
+fi
+
+csv_fname="$1"
+data_dir="$2"
+
+cat "$csv_fname" | tr , ' ' | tr -d '\r' | while read subjid url sex age city project
+do
+    base_fname=`basename $url`
+    curl -sS -o "$data_dir/$base_fname" "$url"
+    volume=`calc_vol "$data_dir/$base_fname"`
+    echo "${subjid},${sex},${age},${city},${project},${volume}"
+done
+
+exit 0
+
+# eof
