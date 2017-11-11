@@ -12,3 +12,7 @@ In Container:
 apt-get update
 apt-get install r-base
 apt-get install git emacs
+
+
+
+docker run -it --rm -v $PWD:/ReproNim_Training/plot myfsl exit

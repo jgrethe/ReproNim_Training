@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 if [ ! -d data ] ; then mkdir data ; fi
+if [ ! -d plot ] ; then mkdir plot ; fi
 
 echo "Calculating female subjects...\n"
 ./calculate_volumes FemaleSubjects.csv data > female.csv
@@ -15,5 +16,5 @@ echo "\n"
 cat results.txt
 
 exit 0
-
+ 
 # eof
